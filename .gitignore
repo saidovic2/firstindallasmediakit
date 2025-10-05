@@ -1,0 +1,19 @@
+# dependencies & OS
+node_modules/
+.DS_Store
+
+# env/keys
+.env
+.env.*
+
+# build outputs
+dist/
+build/
+.next/
+.svelte-kit/
+.out/
+
+# tool/platform caches
+.vite/
+.vercel/
+.netlify/
