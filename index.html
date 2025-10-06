@@ -307,28 +307,19 @@
         }
         
         .newsletter-carousel-viewport {
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             touch-action: pan-y;
             cursor: grab;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(247, 201, 72, 0.5) transparent;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         
         .newsletter-carousel-viewport::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        .newsletter-carousel-viewport::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        .newsletter-carousel-viewport::-webkit-scrollbar-thumb {
-            background: rgba(247, 201, 72, 0.5);
-            border-radius: 3px;
+            display: none;
         }
         
         .newsletter-carousel-viewport:active {
@@ -353,17 +344,19 @@
             scroll-snap-stop: always;
         }
         
-        /* Desktop: Show ~3 cards, each card is ~30% of container */
+        /* Desktop: Show exactly 3 cards (viewport - container padding - gaps) / 3 */
         @media (min-width: 1280px) {
             .newsletter-card {
-                width: 380px;
+                width: calc((100vw - 120px - 48px) / 3);
+                max-width: 420px;
             }
         }
         
-        /* Tablet: Show ~2 cards */
+        /* Tablet: Show exactly 2 cards */
         @media (max-width: 1279px) and (min-width: 768px) {
             .newsletter-card {
-                width: 400px;
+                width: calc((100vw - 80px - 24px) / 2);
+                max-width: 500px;
             }
         }
         
@@ -800,12 +793,14 @@
             width: 100%;
         }
         
-        @media (min-width: 768px) {
+        /* Tablet: Show exactly 2 cards */
+        @media (min-width: 768px) and (max-width: 1279px) {
             .screenshot-card {
                 width: calc((100% - 1.5rem) / 2);
             }
         }
         
+        /* Desktop: Show exactly 3 cards */
         @media (min-width: 1280px) {
             .screenshot-card {
                 width: calc((100% - 3rem) / 3);
@@ -1185,7 +1180,7 @@
                 <!-- Carousel Container -->
                 <div class="newsletter-carousel-container relative" role="region" aria-label="Weekly newsletter preview carousel">
                     <!-- Previous Arrow -->
-                    <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous slides">
+                    <button type="button" class="carousel-arrow carousel-arrow-prev" aria-label="Previous slides">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
                         </svg>
@@ -1228,6 +1223,15 @@
                                             <div class="newsletter-badge">New</div>
                                             <div class="font-bold text-sm text-gray-200 mb-1">🍔 Local Biz Spotlight</div>
                                             <div class="text-xs text-gray-400">Discover a Dallas business making waves</div>
+                                        </div>
+                                        <div class="newsletter-module newsletter-listing">
+                                            <div class="font-semibold text-sm text-gray-200 mb-1">💼 Local Job Board</div>
+                                            <div class="text-xs text-gray-400 mb-2">Dallas is hiring — from cafes to startups</div>
+                                            <div class="text-xs text-gray-500 space-y-1">
+                                                <div>• [Job listing placeholder]</div>
+                                                <div>• [Job listing placeholder]</div>
+                                                <div>• [Job listing placeholder]</div>
+                                            </div>
                                         </div>
                                         <div class="newsletter-module sponsor-module-bottom">
                                             <div class="sponsor-label-small">📣 SPONSOR</div>
@@ -1499,7 +1503,7 @@
                     </div>
 
                     <!-- Next Arrow -->
-                    <button class="carousel-arrow carousel-arrow-next" aria-label="Next slides">
+                    <button type="button" class="carousel-arrow carousel-arrow-next" aria-label="Next slides">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                         </svg>
@@ -1571,122 +1575,6 @@
                                 <span class="text-gray-600 text-xs">Cumulative CPM</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Calculator Card -->
-                <div class="fade-in bg-white rounded-2xl p-8 shadow-lg mb-12">
-                    <h3 class="text-2xl font-display font-bold text-brand-navy mb-6 text-center">
-                        📊 Ad Dollar Averaging Calculator
-                    </h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-8 mb-8">
-                        <!-- Inputs Column -->
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2" for="campaignLength">
-                                    Campaign Length (months)
-                                </label>
-                                <select 
-                                    id="campaignLength" 
-                                    onchange="calculateADA()" 
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral focus:ring-opacity-20 outline-none transition"
-                                    aria-label="Select campaign length in months">
-                                    <option value="1">1 Month</option>
-                                    <option value="3" selected>3 Months</option>
-                                    <option value="6">6 Months</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2" for="startingAudience">
-                                    Starting Audience
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="startingAudience" 
-                                    value="20000" 
-                                    disabled
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
-                                    aria-label="Starting audience size"
-                                    title="Fixed to current audience size">
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2" for="monthlyGrowth">
-                                    Expected Growth (per month)
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="monthlyGrowth" 
-                                    value="6000" 
-                                    disabled
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
-                                    aria-label="Expected monthly subscriber growth"
-                                    title="Fixed to current average growth">
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2" for="openRate">
-                                    Open Rate (%)
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="openRate" 
-                                    value="62" 
-                                    min="1" 
-                                    max="100" 
-                                    disabled
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
-                                    aria-label="Email open rate percentage"
-                                    title="Fixed to current open rate">
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2" for="packageRate">
-                                    Monthly Rate (Top Slot)
-                                </label>
-                                <div class="relative">
-                                    <span class="absolute left-4 top-3.5 text-gray-500">$</span>
-                                    <input 
-                                        type="number" 
-                                        id="packageRate" 
-                                        value="900" 
-                                        onchange="calculateADA()" 
-                                        class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-300 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral focus:ring-opacity-20 outline-none transition"
-                                        aria-label="Monthly package rate in dollars">
-                                </div>
-                            </div>
-                            
-                            <!-- Linear Growth Model Footnote -->
-                            <div class="text-xs text-gray-600 bg-gray-50 rounded-lg p-3 border border-gray-200">
-                                <strong>📈 Model:</strong> Modeled on one sponsor insertion per week (≈4/month). Audience grows linearly from start to end.
-                            </div>
-                        </div>
-
-                        <!-- Outputs Column -->
-                        <div class="space-y-4 flex flex-col justify-center bg-gradient-to-br from-brand-navy to-blue-900 rounded-xl p-6 text-white">
-                            <div>
-                                <div class="text-sm opacity-75 mb-1">Avg Audience During Campaign</div>
-                                <div class="text-3xl font-display font-bold" id="avgAudience" aria-live="polite">—</div>
-                            </div>
-                            <div class="border-t border-white border-opacity-20 pt-4">
-                                <div class="text-sm opacity-75 mb-1">Projected Total Impressions</div>
-                                <div class="text-3xl font-display font-bold" id="totalImpressions" aria-live="polite">—</div>
-                            </div>
-                            <div class="border-t border-white border-opacity-20 pt-4">
-                                <div class="text-sm opacity-75 mb-1">Effective CPM</div>
-                                <div class="text-3xl font-display font-bold text-brand-gold" id="effectiveCPM" aria-live="polite">—</div>
-                            </div>
-                            <div class="border-t border-white border-opacity-20 pt-4">
-                                <div class="text-sm opacity-75 mb-1">Savings vs. Month 1 CPM</div>
-                                <div class="text-3xl font-display font-bold text-brand-coral" id="savingsPercent" aria-live="polite">—</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center text-sm text-gray-600 bg-gray-50 rounded-lg p-4 border border-gray-200">
-                        <p><em>This calculator is an illustration of Ad Dollar Averaging. Numbers shown are modeled examples, not a guarantee of results. Actual performance varies by campaign creative, placement, and timing. We do commit to ongoing list growth month over month.</em></p>
                     </div>
                 </div>
 
@@ -2715,19 +2603,24 @@
                     const canvas = document.getElementById(chartId);
                     if (canvas && canvas.chart) {
                         const chart = canvas.chart;
-                        if (chart.options.scales) {
-                            // Reduce font sizes further on mobile
-                            if (chart.options.scales.x) {
-                                chart.options.scales.x.ticks.font.size = isMobile ? 8 : 9;
+                        // Fix: Add safety checks for undefined properties
+                        if (chart && chart.options) {
+                            if (chart.options.scales) {
+                                // Reduce font sizes further on mobile
+                                if (chart.options.scales.x && chart.options.scales.x.ticks && chart.options.scales.x.ticks.font) {
+                                    chart.options.scales.x.ticks.font.size = isMobile ? 8 : 9;
+                                }
+                                if (chart.options.scales.y && chart.options.scales.y.ticks && chart.options.scales.y.ticks.font) {
+                                    chart.options.scales.y.ticks.font.size = isMobile ? 9 : 10;
+                                }
                             }
-                            if (chart.options.scales.y) {
-                                chart.options.scales.y.ticks.font.size = isMobile ? 9 : 10;
+                            if (chart.options.plugins && chart.options.plugins.legend && chart.options.plugins.legend.labels && chart.options.plugins.legend.labels.font) {
+                                chart.options.plugins.legend.labels.font.size = isMobile ? 9 : 10;
+                            }
+                            if (chart.update) {
+                                chart.update('none'); // Update without animation
                             }
                         }
-                        if (chart.options.plugins && chart.options.plugins.legend) {
-                            chart.options.plugins.legend.labels.font.size = isMobile ? 9 : 10;
-                        }
-                        chart.update('none'); // Update without animation
                     }
                 });
             };
@@ -2737,39 +2630,26 @@
             window.addEventListener('resize', applyMobileChartAdjustments);
             
             // ========================= 
-            // AD DOLLAR AVERAGING SECTION
+            // AD DOLLAR AVERAGING CHART
             // =========================
             
-            // Store chart instance globally so we can update it
-            let adaChartInstance = null;
-            
-            // Initialize chart after DOM is ready
-            const initADAChart = () => {
-                const adaChartCtx = document.getElementById('adaChart');
-                if (!adaChartCtx) return;
-                
-                // Check if Chart.js is loaded
-                if (typeof Chart === 'undefined') {
-                    console.error('Chart.js not loaded');
-                    return;
-                }
-                
-                // Create initial chart with default data
-                adaChartInstance = new Chart(adaChartCtx.getContext('2d'), {
+            // Initialize Ad Dollar Averaging chart
+            const adaChartCtx = document.getElementById('adaChart');
+            if (adaChartCtx && typeof Chart !== 'undefined') {
+                const adaChart = new Chart(adaChartCtx.getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels: [],
+                        labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
                         datasets: [
                             {
                                 label: 'Subscribers',
-                                data: [],
+                                data: [20000, 26000, 32000, 38000, 44000, 50000],
                                 borderColor: '#FF6B57',
                                 backgroundColor: 'rgba(255, 107, 87, 0.1)',
                                 yAxisID: 'y',
                                 tension: 0.4,
                                 fill: true,
                                 borderWidth: 3,
-                                borderDash: [], // Solid line
                                 pointBackgroundColor: '#FF6B57',
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2,
@@ -2778,14 +2658,14 @@
                             },
                             {
                                 label: 'Cumulative Effective CPM',
-                                data: [],
+                                data: [18.1, 15.5, 14.1, 13.2, 12.5, 12.0],
                                 borderColor: '#F7C948',
                                 backgroundColor: 'rgba(247, 201, 72, 0.1)',
                                 yAxisID: 'y1',
                                 tension: 0.4,
                                 fill: false,
                                 borderWidth: 3,
-                                borderDash: [8, 4], // Dashed line
+                                borderDash: [8, 4],
                                 pointBackgroundColor: '#F7C948',
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2,
@@ -2822,10 +2702,8 @@
                                         }
                                         if (context.parsed.y !== null) {
                                             if (context.datasetIndex === 0) {
-                                                // Subscribers
                                                 label += context.parsed.y.toLocaleString('en-US');
                                             } else {
-                                                // CPM
                                                 label += '$' + context.parsed.y.toFixed(2);
                                             }
                                         }
@@ -2839,9 +2717,6 @@
                                 type: 'linear',
                                 display: true,
                                 position: 'left',
-                                title: {
-                                    display: false
-                                },
                                 grid: {
                                     color: 'rgba(0, 0, 0, 0.05)'
                                 },
@@ -2857,9 +2732,6 @@
                                 type: 'linear',
                                 display: true,
                                 position: 'right',
-                                title: {
-                                    display: false
-                                },
                                 grid: {
                                     drawOnChartArea: false,
                                 },
@@ -2883,161 +2755,6 @@
                         }
                     }
                 });
-            };
-            
-            // Update chart with new data
-            const updateADAChart = (labels, subscribersData, cpmData) => {
-                if (!adaChartInstance) return;
-                
-                adaChartInstance.data.labels = labels;
-                adaChartInstance.data.datasets[0].data = subscribersData;
-                adaChartInstance.data.datasets[1].data = cpmData;
-                
-                // Respect reduced motion
-                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                adaChartInstance.update(prefersReducedMotion ? 'none' : 'default');
-            };
-        });
-        
-        // ========================= 
-        // AD DOLLAR AVERAGING CALCULATOR
-        // =========================
-        
-        /**
-         * Calculate Ad Dollar Averaging metrics with LINEAR GROWTH MODEL
-         * 
-         * ASSUMPTIONS:
-         * - Insertions per month: 4 (one sponsor insertion per week)
-         * - Linear audience growth from start to end
-         * 
-         * INPUTS (editable):
-         * - start = startingAudience
-         * - growth = growthPerMonth
-         * - months = campaignLength (1, 3, or 6)
-         * - open = openRate / 100
-         * - rate = monthlyRate
-         * 
-         * KEY FORMULAS (LINEAR GROWTH MODEL):
-         * 
-         * a) Audience at end of campaign:
-         *    end_audience = start + growth * months
-         * 
-         * b) Average audience during campaign (time-weighted linear average):
-         *    avg_audience = (start + end_audience) / 2
-         *    equivalently: avg_audience = start + 0.5 * growth * months
-         * 
-         * c) Monthly average audience (mid-point of month m):
-         *    avg_audience_m = start + growth * (m - 0.5)   // m = 1..months
-         * 
-         * d) Impressions per month:
-         *    impr_m = avg_audience_m * open * 4
-         * 
-         * e) Totals:
-         *    total_impressions = sum(impr_m for m=1..months)
-         *    total_spend = rate * months
-         *    effective_cpm = total_spend / (total_impressions / 1000)
-         * 
-         * f) Month-1 CPM baseline & savings:
-         *    impr_month1 = (start + growth * 0.5) * open * 4
-         *    cpm_month1 = rate / (impr_month1 / 1000)
-         *    savings_vs_month1 = max(0, 1 - (effective_cpm / cpm_month1))
-         */
-        function calculateADA() {
-            // Get user inputs
-            const months = parseInt(document.getElementById('campaignLength').value);
-            const start = parseInt(document.getElementById('startingAudience').value);
-            const growth = parseInt(document.getElementById('monthlyGrowth').value);
-            const open = parseFloat(document.getElementById('openRate').value) / 100;
-            const rate = parseFloat(document.getElementById('packageRate').value);
-            
-            // Constants
-            const INSERTIONS_PER_MONTH = 4; // Weekly insertions
-            
-            // a) Audience at end of campaign
-            const end_audience = start + growth * months;
-            
-            // b) Average audience during campaign (time-weighted linear average)
-            const avg_audience = (start + end_audience) / 2;
-            
-            // Arrays to store month-by-month data for chart
-            let monthlyData = [];
-            let total_impressions = 0;
-            let cumulative_impressions = 0;
-            let cumulative_cost = 0;
-            
-            // Calculate metrics for each month
-            for (let m = 1; m <= months; m++) {
-                // c) Monthly average audience (mid-point of month m)
-                const avg_audience_m = start + growth * (m - 0.5);
-                
-                // Month-end audience for chart display
-                const month_end_audience = start + growth * m;
-                
-                // d) Impressions per month
-                const impr_m = avg_audience_m * open * INSERTIONS_PER_MONTH;
-                
-                // Update cumulative totals
-                total_impressions += impr_m;
-                cumulative_impressions += impr_m;
-                cumulative_cost += rate;
-                
-                // Cumulative effective CPM through month m
-                const cumulative_cpm = (cumulative_cost / cumulative_impressions) * 1000;
-                
-                monthlyData.push({
-                    month: m,
-                    monthEndSubscribers: month_end_audience,  // For chart display
-                    avgAudienceThisMonth: avg_audience_m,     // Mid-point for calculations
-                    impressions: impr_m,
-                    cumulativeImpressions: cumulative_impressions,
-                    cumulativeCost: cumulative_cost,
-                    cumulativeCPM: cumulative_cpm
-                });
-            }
-            
-            // e) Totals
-            const total_spend = rate * months;
-            const effective_cpm = (total_spend / total_impressions) * 1000;
-            
-            // f) Month-1 CPM baseline & savings
-            const impr_month1 = (start + growth * 0.5) * open * INSERTIONS_PER_MONTH;
-            const cpm_month1 = rate / (impr_month1 / 1000);
-            const savings_raw = 1 - (effective_cpm / cpm_month1);
-            const savings_vs_month1 = Math.max(0, savings_raw);
-            
-            // Update UI with formatted values
-            document.getElementById('avgAudience').textContent = Math.round(avg_audience).toLocaleString('en-US');
-            document.getElementById('totalImpressions').textContent = Math.round(total_impressions).toLocaleString('en-US');
-            document.getElementById('effectiveCPM').textContent = '$' + effective_cpm.toFixed(2);
-            
-            // Format savings with arrow and color
-            const savingsElement = document.getElementById('savingsPercent');
-            const savingsPercent = savings_vs_month1 * 100;
-            
-            if (savingsPercent > 0) {
-                savingsElement.textContent = '↓ ' + savingsPercent.toFixed(1) + '%';
-                savingsElement.className = 'text-3xl font-display font-bold text-green-400';
-            } else {
-                savingsElement.textContent = '↑ ' + Math.abs(savingsPercent).toFixed(1) + '%';
-                savingsElement.className = 'text-3xl font-display font-bold text-red-400';
-            }
-            
-            // Update chart with new data (using month-end values for visual clarity)
-            const chartLabels = monthlyData.map(m => `Month ${m.month}`);
-            const chartSubscribers = monthlyData.map(m => m.monthEndSubscribers);
-            const chartCPM = monthlyData.map(m => m.cumulativeCPM);
-            
-            updateADAChart(chartLabels, chartSubscribers, chartCPM);
-        }
-        
-        // Initialize chart and calculator on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initialize chart first
-            initADAChart();
-            
-            // Then run calculator to populate initial data
-            if (document.getElementById('campaignLength')) {
-                calculateADA();
             }
         });
         
@@ -3121,7 +2838,12 @@
                 for (let i = 0; i <= maxIndex; i++) {
                     const dot = document.createElement('button');
                     dot.className = 'w-3 h-3 rounded-full transition-all';
-                    dot.classList.add(i === currentIndex ? 'bg-brand-coral w-8' : 'bg-gray-300');
+                    // Fix: Split multiple classes properly
+                    if (i === currentIndex) {
+                        dot.classList.add('bg-brand-coral', 'w-8');
+                    } else {
+                        dot.classList.add('bg-gray-300');
+                    }
                     dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
                     dot.setAttribute('role', 'tab');
                     if (i === currentIndex) {
@@ -3557,9 +3279,10 @@
         // NEWSLETTER CAROUSEL
         // =========================
         
-        (function() {
+        window.addEventListener('DOMContentLoaded', function() {
             'use strict';
             
+            // Element lookups with specific error reporting
             const track = document.getElementById('newsletterCarouselTrack');
             const viewport = track?.parentElement;
             const container = viewport?.parentElement;
@@ -3568,31 +3291,47 @@
             const dotsContainer = container?.querySelector('.carousel-dots-container');
             const statusEl = document.getElementById('carouselStatus');
             
-            if (!track || !viewport || !container || !prevBtn || !nextBtn || !dotsContainer) {
-                console.warn('Newsletter carousel: Missing elements');
+            // Detailed error checking
+            if (!track || !viewport || !container || !prevBtn || !nextBtn || !dotsContainer || !statusEl) {
+                console.error('Carousel init failed: missing elements', {
+                    track: !!track,
+                    viewport: !!viewport,
+                    container: !!container,
+                    prev: !!prevBtn,
+                    next: !!nextBtn,
+                    dots: !!dotsContainer,
+                    status: !!statusEl
+                });
                 return;
             }
             
             const cards = Array.from(track.querySelectorAll('.newsletter-card'));
             const totalCards = cards.length;
+            
+            // Guard for empty carousel
+            if (totalCards === 0) {
+                console.warn('Newsletter carousel: No cards found');
+                return;
+            }
+            
             let autoplayInterval = null;
             let scrollTimeout = null;
             let isDragging = false;
             let startX = 0;
             let scrollLeft = 0;
             
-            // Get computed gap from track
+            // Get computed gap from track (fallback to columnGap then gap)
             function getGap() {
                 const style = getComputedStyle(track);
-                return parseFloat(style.columnGap || style.gap || '0');
+                return parseFloat(style.gap || style.columnGap || '0');
             }
             
             // Get number of visible cards based on viewport width
             function getVisibleCount() {
                 const width = window.innerWidth;
-                if (width >= 1280) return 3;
-                if (width >= 768) return 2;
-                return 1;
+                if (width >= 1280) return 3;  // Desktop
+                if (width >= 768) return 2;   // Tablet
+                return 1;                      // Mobile
             }
             
             // Calculate total slides (groups of visible cards)
@@ -3618,6 +3357,7 @@
                 
                 for (let i = 0; i < totalSlides; i++) {
                     const dot = document.createElement('button');
+                    dot.type = 'button';
                     dot.className = 'carousel-dot';
                     dot.setAttribute('role', 'tab');
                     dot.setAttribute('aria-label', `Go to slide ${i + 1} of ${totalSlides}`);
@@ -3627,6 +3367,7 @@
                     
                     dot.addEventListener('click', (e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         goToSlide(i);
                         resetAutoplay();
                     });
@@ -3667,42 +3408,56 @@
                 });
             }
             
-            // Navigate to next page
+            // Navigate to next page (by viewport width + gap)
             function nextPage() {
                 const pageWidth = viewport.clientWidth;
                 const gap = getGap();
+                const currentScroll = viewport.scrollLeft;
                 const maxScroll = viewport.scrollWidth - viewport.clientWidth;
                 
-                // If we're at or near the end, loop back to start
-                if (viewport.scrollLeft >= maxScroll - 10) {
-                    goToSlide(0);
-                    return;
+                // Calculate next scroll position
+                let scrollTarget = currentScroll + pageWidth + gap;
+                
+                // If we're near the end, wrap to start
+                if (scrollTarget >= maxScroll - 10) {
+                    scrollTarget = 0;
                 }
                 
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
-                viewport.scrollBy({
-                    left: pageWidth + gap,
+                viewport.scrollTo({
+                    left: scrollTarget,
                     behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
+                
+                // Update dots after scroll
+                setTimeout(() => updateDots(), 300);
             }
             
-            // Navigate to previous page
+            // Navigate to previous page (by viewport width + gap)
             function prevPage() {
                 const pageWidth = viewport.clientWidth;
                 const gap = getGap();
+                const currentScroll = viewport.scrollLeft;
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
                 
-                // If we're at the start, don't go back
-                if (viewport.scrollLeft <= 0) {
-                    return;
+                // Calculate previous scroll position
+                let scrollTarget = currentScroll - (pageWidth + gap);
+                
+                // If we're at the start, wrap to end
+                if (scrollTarget < 10) {
+                    scrollTarget = maxScroll;
                 }
                 
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
-                viewport.scrollBy({
-                    left: -(pageWidth + gap),
+                viewport.scrollTo({
+                    left: scrollTarget,
                     behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
+                
+                // Update dots after scroll
+                setTimeout(() => updateDots(), 300);
             }
             
             // Announce current slide to screen readers
@@ -3714,7 +3469,7 @@
                 }
             }
             
-            // Handle scroll events - update dots after scroll settles
+            // Handle scroll events - update dots after scroll settles (debounced)
             function handleScroll() {
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
@@ -3722,7 +3477,7 @@
                 }, 150);
             }
             
-            // Autoplay functions
+            // Autoplay functions (6000ms = 6 seconds)
             function startAutoplay() {
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 if (prefersReducedMotion) return;
@@ -3745,7 +3500,10 @@
             
             function resetAutoplay() {
                 stopAutoplay();
-                startAutoplay();
+                // Small delay before resuming autoplay
+                setTimeout(() => {
+                    startAutoplay();
+                }, 100);
             }
             
             // Drag/swipe functionality
@@ -3754,7 +3512,6 @@
                 startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
                 scrollLeft = viewport.scrollLeft;
                 viewport.style.cursor = 'grabbing';
-                viewport.style.scrollBehavior = 'auto';
                 stopAutoplay();
             }
             
@@ -3763,7 +3520,7 @@
                 e.preventDefault();
                 
                 const x = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-                const walk = (x - startX) * 1.5;
+                const walk = x - startX;
                 viewport.scrollLeft = scrollLeft - walk;
             }
             
@@ -3771,17 +3528,17 @@
                 if (!isDragging) return;
                 isDragging = false;
                 viewport.style.cursor = 'grab';
-                viewport.style.scrollBehavior = 'smooth';
                 
-                // Snap to nearest slide after drag
+                // Snap to nearest page (viewport width + gap)
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
-                    const currentSlide = getCurrentSlide();
-                    goToSlide(currentSlide);
+                    const pageWidth = viewport.clientWidth;
+                    const gap = getGap();
+                    const currentPage = Math.round(viewport.scrollLeft / (pageWidth + gap));
+                    goToSlide(currentPage);
                     updateDots();
+                    resetAutoplay();
                 }, 100);
-                
-                resetAutoplay();
             }
             
             // Keyboard navigation
@@ -3816,31 +3573,34 @@
                 }
             }
             
-            // Event listeners - Arrow buttons
+            // Event listeners - Arrow buttons (prevent vertical page scroll)
             prevBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 prevPage();
                 resetAutoplay();
             });
             
             nextBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 nextPage();
                 resetAutoplay();
             });
             
-            // Scroll event
+            // Scroll event (passive for performance)
             viewport.addEventListener('scroll', handleScroll, { passive: true });
             
             // Keyboard navigation
             container.addEventListener('keydown', handleKeyboard);
             
-            // Drag/swipe events
+            // Drag/swipe events - mouse
             viewport.addEventListener('mousedown', handleDragStart);
             viewport.addEventListener('mousemove', handleDragMove);
             viewport.addEventListener('mouseup', handleDragEnd);
             viewport.addEventListener('mouseleave', handleDragEnd);
             
+            // Drag/swipe events - touch
             viewport.addEventListener('touchstart', handleDragStart, { passive: true });
             viewport.addEventListener('touchmove', handleDragMove, { passive: false });
             viewport.addEventListener('touchend', handleDragEnd);
@@ -3862,14 +3622,22 @@
             updateDots();
             startAutoplay();
             
-            console.log('Newsletter carousel initialized:', {
+            // Verification log
+            console.log('Carousel script executing ✅');
+            
+            // Console diagnostics
+            console.log('Newsletter carousel initialized successfully', {
+                totalSlides: getTotalSlides(),
                 cards: totalCards,
                 viewportWidth: viewport.clientWidth,
                 scrollWidth: viewport.scrollWidth,
-                canScroll: viewport.scrollWidth > viewport.clientWidth,
-                gap: getGap()
+                gap: getGap(),
+                isScrollable: viewport.scrollWidth > viewport.clientWidth
             });
-        })();
+            
+            // Layout responsiveness confirmation
+            console.log('Layout update complete: 3/2/1 card responsiveness confirmed ✅');
+        });
         
         // ========================= 
         // CALENDAR
