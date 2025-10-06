@@ -49,7 +49,38 @@
         }
         
         .hero-gradient {
-            background: linear-gradient(to bottom, #0a1929 0%, #1a2332 30%, #2a3441 60%, #3a4551 100%);
+            background: linear-gradient(to bottom, #F7F6F2 0%, #EDEAE2 100%);
+            position: relative;
+        }
+        
+        .hero-skyline-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(0,31,63,0.03)' d='M0,160L48,165.3C96,171,192,181,288,181.3C384,181,480,171,576,154.7C672,139,768,117,864,122.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .hero-mockup {
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 1s ease-out 0.3s forwards;
+        }
+        
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-mockup img {
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+            max-width: 100%;
+            height: auto;
         }
         
         .skyline-bg {
@@ -976,37 +1007,54 @@
     <!-- ========================= -->
     <!-- HERO SECTION -->
     <!-- ========================= -->
-    <section class="hero-gradient skyline-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <!-- Dark overlay for better text contrast -->
-        <div class="absolute inset-0 bg-black bg-opacity-20 z-0"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="hero-content">
-                <div class="text-sm md:text-base font-semibold tracking-widest text-brand-gold mb-4 uppercase" style="text-shadow: 0 1px 4px rgba(0,0,0,0.6); letter-spacing: 0.15em;">
-                    Daily Local Newsletter
+    <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+        <!-- Skyline Background -->
+        <div class="hero-skyline-bg"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+                <!-- Left Column: Text Content -->
+                <div class="hero-content text-left">
+                    <div class="text-sm md:text-base font-semibold tracking-widest text-brand-coral mb-4 uppercase" style="letter-spacing: 0.15em;">
+                        Daily Local Newsletter
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-display font-bold text-brand-navy mb-6 leading-tight">
+                        The local voice<br>
+                        <span class="text-brand-coral">Dallas trusts.</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
+                        Reach 20,000+ Dallas residents where they decide what to do, eat, and buy — every day.
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-600 mb-12 leading-relaxed">
+                        When brands partner with FirstinDallas, they align with a trusted community voice that drives real engagement — not just impressions.
+                    </p>
+                    
+                    <button onclick="document.getElementById('packages').scrollIntoView({ behavior: 'smooth' })" class="cta-button text-white px-10 py-4 rounded-full text-lg font-semibold">
+                        Book a Sponsor Slot →
+                    </button>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-display font-bold text-white mb-6 leading-tight" style="text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
-                    The local voice<br>
-                    <span style="color: #FFD54F; text-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 15px rgba(255, 213, 79, 0.3);">Dallas trusts.</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
-                    Reach 20,000+ Dallas residents where they decide what to do, eat, and buy — every day.
-                </p>
-                <p class="text-lg md:text-xl text-white mb-12 max-w-2xl mx-auto opacity-90" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
-                    When brands partner with FirstinDallas, they align with a trusted community voice that drives real engagement — not just impressions.
-                </p>
                 
-                <button onclick="document.getElementById('packages').scrollIntoView({ behavior: 'smooth' })" class="cta-button text-white px-10 py-4 rounded-full text-lg font-semibold">
-                    Book a Sponsor Slot →
-                </button>
+                <!-- Right Column: Phone Mockup -->
+                <div class="hero-mockup flex justify-center lg:justify-end">
+                    <picture class="hero-phone">
+                        <img
+                            src="./assets/mockup-hero.png"
+                            alt="FirstinDallas Newsletter on iPhone"
+                            loading="lazy"
+                            decoding="async"
+                            width="360"
+                            height="auto"
+                            class="max-w-full lg:max-w-md"
+                            style="max-width: 360px;"
+                            onerror="this.style.display='none'">
+                    </picture>
+                </div>
             </div>
         </div>
         
-        <!-- Skyline Divider -->
-        <div class="skyline-divider"></div>
-        
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-32 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <svg class="w-6 h-6 text-brand-navy opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
@@ -1932,18 +1980,20 @@
                 <div id="packages-tabs" class="flex justify-center items-center gap-4 mb-12 flex-wrap" role="tablist" aria-label="Sponsorship package options">
                     <button 
                         id="tab-starter" 
-                        class="packages-tab-button" 
+                        class="packages-tab-button active" 
                         role="tab" 
-                        aria-selected="false" 
+                        aria-selected="true" 
+                        tabindex="0"
                         aria-controls="content-starter"
                         onclick="switchPackageTab('starter')">
                         Starter
                     </button>
                     <button 
                         id="tab-momentum" 
-                        class="packages-tab-button active" 
+                        class="packages-tab-button" 
                         role="tab" 
-                        aria-selected="true" 
+                        aria-selected="false" 
+                        tabindex="-1"
                         aria-controls="content-momentum"
                         onclick="switchPackageTab('momentum')">
                         Momentum
@@ -1954,6 +2004,7 @@
                         class="packages-tab-button" 
                         role="tab" 
                         aria-selected="false" 
+                        tabindex="-1"
                         aria-controls="content-takeover"
                         onclick="switchPackageTab('takeover')">
                         Takeover
@@ -1963,6 +2014,7 @@
                         class="packages-tab-button" 
                         role="tab" 
                         aria-selected="false" 
+                        tabindex="-1"
                         aria-controls="content-dedicated"
                         onclick="switchPackageTab('dedicated')">
                         Dedicated Email
@@ -1972,7 +2024,7 @@
                 <!-- Tab Content -->
                 <div id="packages-content">
                     <!-- Starter Tab Content -->
-                    <div id="content-starter" class="packages-tab-content" role="tabpanel" aria-labelledby="tab-starter">
+                    <div id="content-starter" class="packages-tab-content active" role="tabpanel" aria-labelledby="tab-starter" hidden="false">
                         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                             <!-- Starter Top Slot -->
                             <div class="packages-mini-card">
@@ -2013,7 +2065,7 @@
                     </div>
                     
                     <!-- Momentum Tab Content -->
-                    <div id="content-momentum" class="packages-tab-content active" role="tabpanel" aria-labelledby="tab-momentum">
+                    <div id="content-momentum" class="packages-tab-content" role="tabpanel" aria-labelledby="tab-momentum" hidden="true">
                         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                             <!-- Momentum Top Slot -->
                             <div class="packages-mini-card">
@@ -3852,18 +3904,31 @@
                     // Activate selected tab
                     tabButton.classList.add('active');
                     tabButton.setAttribute('aria-selected', 'true');
+                    tabButton.setAttribute('tabindex', '0');
                     tabContent.classList.add('active');
+                    tabContent.setAttribute('hidden', 'false');
                 } else {
                     // Deactivate other tabs
                     tabButton.classList.remove('active');
                     tabButton.setAttribute('aria-selected', 'false');
+                    tabButton.setAttribute('tabindex', '-1');
                     tabContent.classList.remove('active');
+                    tabContent.setAttribute('hidden', 'true');
                 }
             });
         }
         
-        // Keyboard navigation for tabs
+        // Initialize tabs on page load
         document.addEventListener('DOMContentLoaded', () => {
+            // Check for hash-based deeplink (e.g., #packages=momentum)
+            const hash = window.location.hash.toLowerCase();
+            const match = /packages=(starter|momentum|takeover|dedicated)/.exec(hash);
+            const preferredTab = match ? match[1] : 'starter';
+            
+            // Activate the preferred tab (defaults to 'starter')
+            switchPackageTab(preferredTab);
+            
+            // Keyboard navigation for tabs
             const tabButtons = document.querySelectorAll('.packages-tab-button');
             
             tabButtons.forEach((button, index) => {
