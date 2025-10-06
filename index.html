@@ -852,6 +852,118 @@
                 transition: none !important;
             }
         }
+        
+        /* ========================= */
+        /* PACKAGES TAB STYLES */
+        /* ========================= */
+        
+        .packages-tab-button {
+            position: relative;
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: white;
+            color: #4B5563;
+            cursor: pointer;
+        }
+        
+        .packages-tab-button:hover:not(.active) {
+            border-color: #E5E7EB;
+            background: #F9FAFB;
+            transform: translateY(-2px);
+        }
+        
+        .packages-tab-button:focus {
+            outline: 2px solid #FF6B57;
+            outline-offset: 3px;
+        }
+        
+        .packages-tab-button.active {
+            background: #FF6B57;
+            color: white;
+            border-color: #FF6B57;
+            box-shadow: 0 4px 12px rgba(255, 107, 87, 0.3);
+        }
+        
+        .packages-tab-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #F7C948;
+            color: #001F3F;
+            font-size: 0.625rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        
+        .packages-tab-content {
+            display: none;
+            opacity: 0;
+            animation: fadeInContent 0.4s ease-out forwards;
+        }
+        
+        .packages-tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .packages-mini-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .packages-mini-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .packages-mini-card-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #E5E7EB, transparent);
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 767px) {
+            .packages-tab-button {
+                width: 100%;
+                padding: 0.75rem 1.5rem;
+            }
+            
+            #packages-tabs {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .packages-tab-button,
+            .packages-mini-card {
+                transition: none !important;
+            }
+            
+            .packages-tab-content {
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -1863,177 +1975,154 @@
     <section id="packages" class="py-20 bg-brand-cream">
         <div class="container mx-auto px-6">
             <div class="max-w-6xl mx-auto">
-                <div class="fade-in text-center mb-16">
+                <div class="fade-in text-center mb-12">
                     <h2 class="text-4xl md:text-5xl font-display font-bold text-brand-navy mb-6">
                         Sponsorship Packages
                     </h2>
-                    <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    <p class="text-xl text-gray-700 max-w-2xl mx-auto mb-4">
                         Flexible options to fit your goals and budget. Every package includes detailed performance analytics.
+                    </p>
+                    <p class="text-base text-gray-600">
+                        Flexible options by slot & commitment.
                     </p>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Starter Top -->
-                    <div class="fade-in package-card bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-coral opacity-10 rounded-full -mr-16 -mt-16"></div>
-                        <div class="text-4xl mb-4">💡</div>
-                        <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Starter (Top Slot)</h3>
-                        <div class="text-4xl font-display font-bold text-brand-coral mb-6">$250<span class="text-lg text-gray-500 font-normal">/insertion</span></div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One top ad slot (right after intro)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Up to 60 words + link/logo</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Performance snapshot after send</span>
-                            </li>
-                        </ul>
-                        <button onclick="openBookingModal('Starter (Top Slot)')" class="w-full bg-brand-navy text-white py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
-                            Select Package
-                        </button>
+                <!-- Tab Buttons -->
+                <div id="packages-tabs" class="flex justify-center items-center gap-4 mb-12 flex-wrap" role="tablist" aria-label="Sponsorship package options">
+                    <button 
+                        id="tab-starter" 
+                        class="packages-tab-button" 
+                        role="tab" 
+                        aria-selected="false" 
+                        aria-controls="content-starter"
+                        onclick="switchPackageTab('starter')">
+                        Starter
+                    </button>
+                    <button 
+                        id="tab-momentum" 
+                        class="packages-tab-button active" 
+                        role="tab" 
+                        aria-selected="true" 
+                        aria-controls="content-momentum"
+                        onclick="switchPackageTab('momentum')">
+                        Momentum
+                        <span class="packages-tab-badge">Popular</span>
+                    </button>
+                    <button 
+                        id="tab-takeover" 
+                        class="packages-tab-button" 
+                        role="tab" 
+                        aria-selected="false" 
+                        aria-controls="content-takeover"
+                        onclick="switchPackageTab('takeover')">
+                        Takeover
+                    </button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="packages-content">
+                    <!-- Starter Tab Content -->
+                    <div id="content-starter" class="packages-tab-content" role="tabpanel" aria-labelledby="tab-starter">
+                        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            <!-- Starter Top Slot -->
+                            <div class="packages-mini-card">
+                                <div class="text-3xl mb-3">🌟</div>
+                                <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Starter (Top Slot)</h3>
+                                <div class="text-3xl font-display font-bold text-brand-coral mb-4">$250<span class="text-base text-gray-500 font-normal"> / insertion</span></div>
+                                <ul class="space-y-2 text-gray-700 mb-6">
+                                    <li>• One Top Ad Slot (right after the intro)</li>
+                                    <li>• Up to 60 words + 1 link + logo (PNG/SVG)</li>
+                                    <li>• Performance snapshot after send (opens, clicks)</li>
+                                    <li>• Creative due 24h before send; one round of quick edits</li>
+                                    <li>• UTM tracking supported (provide your parameters)</li>
+                                </ul>
+                                <div class="packages-mini-card-divider"></div>
+                                <a href="mailto:hello@firstindallas.com?subject=Starter%20(Top%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    Select Package
+                                </a>
+                            </div>
+                            
+                            <!-- Starter Bottom Slot -->
+                            <div class="packages-mini-card">
+                                <div class="text-3xl mb-3">🌟</div>
+                                <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Starter (Bottom Slot)</h3>
+                                <div class="text-3xl font-display font-bold text-brand-coral mb-4">$150<span class="text-base text-gray-500 font-normal"> / insertion</span></div>
+                                <ul class="space-y-2 text-gray-700 mb-6">
+                                    <li>• One Bottom Ad Slot (near the footer)</li>
+                                    <li>• Up to 60 words + 1 link + logo (PNG/SVG)</li>
+                                    <li>• Performance snapshot after 48h (opens, clicks)</li>
+                                    <li>• Creative due 24h before send; one round of quick edits</li>
+                                    <li>• UTM tracking supported (provide your parameters)</li>
+                                </ul>
+                                <div class="packages-mini-card-divider"></div>
+                                <a href="mailto:hello@firstindallas.com?subject=Starter%20(Bottom%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    Select Package
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Starter Bottom -->
-                    <div class="fade-in package-card bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold opacity-10 rounded-full -mr-16 -mt-16"></div>
-                        <div class="text-4xl mb-4">💡</div>
-                        <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Starter (Bottom Slot)</h3>
-                        <div class="text-4xl font-display font-bold text-brand-coral mb-6">$150<span class="text-lg text-gray-500 font-normal">/insertion</span></div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One bottom ad slot (near footer)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Up to 60 words + link/logo</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Performance snapshot after 48 hours</span>
-                            </li>
-                        </ul>
-                        <button onclick="openBookingModal('Starter (Bottom Slot)')" class="w-full bg-brand-navy text-white py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
-                            Select Package
-                        </button>
+                    <!-- Momentum Tab Content -->
+                    <div id="content-momentum" class="packages-tab-content active" role="tabpanel" aria-labelledby="tab-momentum">
+                        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            <!-- Momentum Top Slot -->
+                            <div class="packages-mini-card">
+                                <div class="text-3xl mb-3">🚀</div>
+                                <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Momentum (Top Slot)</h3>
+                                <div class="text-3xl font-display font-bold text-brand-coral mb-4">$900<span class="text-base text-gray-500 font-normal"> / month</span></div>
+                                <ul class="space-y-2 text-gray-700 mb-6">
+                                    <li>• One Top Slot per week (~4 insertions / month)</li>
+                                    <li>• Prime placement: right after the intro (highest visibility section)</li>
+                                    <li>• "Today's sponsor" mention in the intro line</li>
+                                    <li>• Weekly performance summary (opens, clicks, CTR by insertion)</li>
+                                    <li>• Complimentary copy polish on first insertion</li>
+                                </ul>
+                                <div class="packages-mini-card-divider"></div>
+                                <a href="mailto:hello@firstindallas.com?subject=Momentum%20(Top%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    Select Package
+                                </a>
+                            </div>
+                            
+                            <!-- Momentum Bottom Slot -->
+                            <div class="packages-mini-card">
+                                <div class="text-3xl mb-3">🚀</div>
+                                <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Momentum (Bottom Slot)</h3>
+                                <div class="text-3xl font-display font-bold text-brand-coral mb-4">$600<span class="text-base text-gray-500 font-normal"> / month</span></div>
+                                <ul class="space-y-2 text-gray-700 mb-6">
+                                    <li>• One Bottom Slot per week (~4 insertions / month)</li>
+                                    <li>• Consistent end-of-newsletter visibility at a lower rate</li>
+                                    <li>• Weekly performance summary (opens, clicks, CTR by insertion)</li>
+                                    <li>• Complimentary copy polish on first insertion</li>
+                                </ul>
+                                <div class="packages-mini-card-divider"></div>
+                                <a href="mailto:hello@firstindallas.com?subject=Momentum%20(Bottom%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    Select Package
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Momentum Top -->
-                    <div class="fade-in package-card bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden border-2 border-brand-coral">
-                        <div class="absolute top-4 right-4 bg-brand-coral text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-coral opacity-10 rounded-full -mr-16 -mt-16"></div>
-                        <div class="text-4xl mb-4">🚀</div>
-                        <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Momentum (Top Slot)</h3>
-                        <div class="text-4xl font-display font-bold text-brand-coral mb-6">$900<span class="text-lg text-gray-500 font-normal">/month</span></div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One top slot per week (~4 insertions)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>"Today's sponsor" mention in intro line</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Weekly performance summary</span>
-                            </li>
-                        </ul>
-                        <button onclick="openBookingModal('Momentum (Top Slot)')" class="w-full bg-brand-coral text-white py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
-                            Select Package
-                        </button>
-                    </div>
-                    
-                    <!-- Momentum Bottom -->
-                    <div class="fade-in package-card bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold opacity-10 rounded-full -mr-16 -mt-16"></div>
-                        <div class="text-4xl mb-4">🚀</div>
-                        <h3 class="text-2xl font-display font-bold text-brand-navy mb-2">Momentum (Bottom Slot)</h3>
-                        <div class="text-4xl font-display font-bold text-brand-coral mb-6">$600<span class="text-lg text-gray-500 font-normal">/month</span></div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One bottom slot per week (~4 insertions)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Steady end-of-newsletter visibility</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-coral mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Weekly performance summary</span>
-                            </li>
-                        </ul>
-                        <button onclick="openBookingModal('Momentum (Bottom Slot)')" class="w-full bg-brand-navy text-white py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
-                            Select Package
-                        </button>
-                    </div>
-                    
-                    <!-- Takeover -->
-                    <div class="fade-in package-card bg-gradient-to-br from-brand-navy to-blue-900 text-white rounded-2xl p-8 shadow-lg relative overflow-hidden md:col-span-2 lg:col-span-1">
-                        <div class="absolute top-4 right-4 bg-brand-gold text-brand-navy text-xs font-bold px-3 py-1 rounded-full">PREMIUM</div>
-                        <div class="absolute bottom-0 left-0 w-40 h-40 bg-brand-coral opacity-20 rounded-full -ml-20 -mb-20"></div>
-                        <div class="text-4xl mb-4">🔥</div>
-                        <h3 class="text-2xl font-display font-bold mb-2">Takeover</h3>
-                        <div class="text-4xl font-display font-bold text-brand-gold mb-6">$3,000<span class="text-lg text-white text-opacity-70 font-normal">/3 months</span></div>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One top + bottom slot per week (≈12 insertions)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>"Brought to you by [Sponsor]" tag in header</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>One spotlight feature with image/logo</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-brand-gold mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Weekly performance report</span>
-                            </li>
-                        </ul>
-                        <button onclick="openBookingModal('Takeover')" class="w-full bg-brand-gold text-brand-navy py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
-                            Select Package
-                        </button>
+                    <!-- Takeover Tab Content -->
+                    <div id="content-takeover" class="packages-tab-content" role="tabpanel" aria-labelledby="tab-takeover">
+                        <div class="max-w-2xl mx-auto">
+                            <div class="packages-mini-card bg-gradient-to-br from-brand-navy to-blue-900 text-white">
+                                <div class="text-4xl mb-4">🔥</div>
+                                <h3 class="text-3xl font-display font-bold mb-3">Takeover</h3>
+                                <div class="text-4xl font-display font-bold text-brand-gold mb-6">$3,000<span class="text-lg text-white text-opacity-70 font-normal"> / 3 months</span></div>
+                                <ul class="space-y-3 text-white text-opacity-90 mb-8">
+                                    <li>• One Top Slot per week (~12 insertions / 3 months)</li>
+                                    <li>• One Bottom Slot per week (~12 insertions / 3 months)</li>
+                                    <li>• Header image tag: "Brought to you by [Sponsor]" on your run days</li>
+                                    <li>• One Spotlight Feature (image/logo) during the campaign</li>
+                                    <li>• Weekly performance report + recap at end of campaign</li>
+                                    <li>• Priority scheduling and creative review</li>
+                                </ul>
+                                <div class="packages-mini-card-divider" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);"></div>
+                                <a href="mailto:hello@firstindallas.com?subject=Takeover%20Package%20Inquiry" class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    Select Package
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3788,6 +3877,64 @@
             });
             */
         }
+        
+        // ========================= 
+        // PACKAGES TAB SWITCHING
+        // =========================
+        
+        function switchPackageTab(tabName) {
+            // Get all tab buttons and content panels
+            const tabs = ['starter', 'momentum', 'takeover'];
+            
+            // Update each tab and content panel
+            tabs.forEach(tab => {
+                const tabButton = document.getElementById(`tab-${tab}`);
+                const tabContent = document.getElementById(`content-${tab}`);
+                
+                if (tab === tabName) {
+                    // Activate selected tab
+                    tabButton.classList.add('active');
+                    tabButton.setAttribute('aria-selected', 'true');
+                    tabContent.classList.add('active');
+                } else {
+                    // Deactivate other tabs
+                    tabButton.classList.remove('active');
+                    tabButton.setAttribute('aria-selected', 'false');
+                    tabContent.classList.remove('active');
+                }
+            });
+        }
+        
+        // Keyboard navigation for tabs
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.packages-tab-button');
+            
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('keydown', (e) => {
+                    let newIndex = index;
+                    
+                    // Arrow key navigation
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        newIndex = (index + 1) % tabButtons.length;
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        newIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        newIndex = 0;
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        newIndex = tabButtons.length - 1;
+                    }
+                    
+                    if (newIndex !== index) {
+                        tabButtons[newIndex].focus();
+                        tabButtons[newIndex].click();
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
