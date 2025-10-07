@@ -977,6 +977,129 @@
                 animation: none !important;
             }
         }
+        
+        /* ========================= */
+        /* WORKED WITH LOGO CAROUSEL */
+        /* ========================= */
+        
+        .worked-logos-carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+        
+        .worked-logos-marquee {
+            display: flex;
+            width: fit-content;
+            animation: worked-logos-scroll 26s linear infinite;
+        }
+        
+        .worked-logos-marquee:hover {
+            animation-play-state: paused;
+        }
+        
+        .worked-logos-track {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .worked-logos-track-clone {
+            margin-left: 3rem;
+        }
+        
+        .worked-logos-box {
+            width: 240px;
+            height: 92px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .worked-logos-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        .worked-logos-img {
+            max-height: 64px;
+            max-width: 200px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            image-rendering: auto;
+            filter: grayscale(100%);
+            opacity: 0.75;
+            transition: transform 0.2s, filter 0.3s, opacity 0.3s;
+        }
+        
+        .worked-logos-box:hover .worked-logos-img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Transparent background safety */
+        .worked-logos-box img,
+        .worked-logos-box source {
+            background: transparent;
+        }
+        
+        /* Blend mode to remove white artifacts on light background */
+        .worked-logos-box picture,
+        .worked-logos-box img {
+            mix-blend-mode: multiply;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .worked-logos-box picture,
+            .worked-logos-box img {
+                mix-blend-mode: normal;
+            }
+        }
+        
+        @keyframes worked-logos-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .worked-logos-track {
+                gap: 2rem;
+            }
+            
+            .worked-logos-track-clone {
+                margin-left: 2rem;
+            }
+            
+            .worked-logos-box {
+                width: 200px;
+                height: 80px;
+            }
+            
+            .worked-logos-img {
+                max-height: 52px;
+                max-width: 180px;
+            }
+        }
+        
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .worked-logos-marquee {
+                animation: none !important;
+            }
+            
+            .worked-logos-box,
+            .worked-logos-img {
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -1057,6 +1180,121 @@
             <svg class="w-6 h-6 text-brand-navy opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
+        </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- WORKED WITH SECTION -->
+    <!-- ========================= -->
+    <section id="worked-with" class="py-12 bg-brand-cream">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto text-center">
+                <!-- Section Header -->
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-brand-navy mb-2">
+                    Trusted by Dallas brands
+                </h2>
+                <p class="text-base text-gray-500 mb-10">
+                    A few of the companies we've promoted.
+                </p>
+                
+                <!-- Logo Carousel -->
+                <div class="worked-logos-carousel-wrapper" aria-label="Partner logos carousel">
+                    <div class="worked-logos-marquee">
+                        <div class="worked-logos-track">
+                            <!-- Logo 1 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w1.png" 
+                                    alt="DFW CheapFlights"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                            <!-- Logo 2 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w2.svg" 
+                                    alt="Edge"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                            <!-- Logo 3 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w3.png" 
+                                    alt="1440 Media"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                        </div>
+                        <!-- Duplicate track for seamless loop -->
+                        <div class="worked-logos-track worked-logos-track-clone" aria-hidden="true">
+                            <!-- Logo 1 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w1.png" 
+                                    alt="DFW CheapFlights"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                            <!-- Logo 2 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w2.svg" 
+                                    alt="Edge"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                            <!-- Logo 3 -->
+                            <div class="worked-logos-box">
+                                <img 
+                                    src="./assets/w3.png" 
+                                    alt="1440 Media"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="worked-logos-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Auto-scale tiny source images -->
+                <script>
+                (function(){
+                  const imgs = document.querySelectorAll('.worked-logos-box img');
+                  imgs.forEach(img => {
+                    const apply = () => {
+                      const nw = img.naturalWidth || 0, nh = img.naturalHeight || 0;
+                      // If the source file is tiny, scale it up for visual parity
+                      if ((nw && nw < 180) || (nh && nh < 60)) {
+                        const factor = nw < 140 || nh < 40 ? 1.6 : 1.35;  // gentle bump
+                        img.style.transform = `scale(${factor})`;
+                        img.style.transformOrigin = 'center center';
+                        img.dataset.autoScale = factor;  // Store for hover
+                      }
+                    };
+                    if (img.complete) apply(); else img.addEventListener('load', apply, {once:true});
+                    
+                    // Handle hover with existing scale
+                    const box = img.closest('.worked-logos-box');
+                    if (box) {
+                      box.addEventListener('mouseenter', () => {
+                        const scale = img.dataset.autoScale || 1;
+                        img.style.transform = `scale(${scale}) translateY(-2px)`;
+                      });
+                      box.addEventListener('mouseleave', () => {
+                        const scale = img.dataset.autoScale || 1;
+                        img.style.transform = `scale(${scale})`;
+                      });
+                    }
+                  });
+                })();
+                </script>
+            </div>
         </div>
     </section>
 
