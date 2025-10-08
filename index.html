@@ -979,6 +979,50 @@
         }
         
         /* ========================= */
+        /* THANK YOU TOAST NOTIFICATION */
+        /* ========================= */
+        
+        .thank-you-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150px);
+            background: #001F3F;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 31, 63, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .thank-you-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 640px) {
+            .thank-you-toast {
+                bottom: 20px;
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .thank-you-toast {
+                transition: opacity 0.2s ease !important;
+                transform: translateX(-50%) translateY(0) !important;
+            }
+        }
+        
+        /* ========================= */
         /* WORKED WITH LOGO CAROUSEL */
         /* ========================= */
         
@@ -2277,7 +2321,10 @@
                                     <li>• UTM tracking supported (provide your parameters)</li>
                                 </ul>
                                 <div class="packages-mini-card-divider"></div>
-                                <a href="mailto:hello@firstindallas.com?subject=Starter%20(Top%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                <a class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                   data-plan="Starter (Top Slot)"
+                                   href="https://tally.so/r/mV2qJM?selected_plan=Starter%20(Top%20Slot)&source=media-kit"
+                                   target="_blank" rel="noopener">
                                     Select Package
                                 </a>
                             </div>
@@ -2295,7 +2342,10 @@
                                     <li>• UTM tracking supported (provide your parameters)</li>
                                 </ul>
                                 <div class="packages-mini-card-divider"></div>
-                                <a href="mailto:hello@firstindallas.com?subject=Starter%20(Bottom%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                <a class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                   data-plan="Starter (Bottom Slot)"
+                                   href="https://tally.so/r/mV2qJM?selected_plan=Starter%20(Bottom%20Slot)&source=media-kit"
+                                   target="_blank" rel="noopener">
                                     Select Package
                                 </a>
                             </div>
@@ -2318,7 +2368,10 @@
                                     <li>• Complimentary copy polish on first insertion</li>
                                 </ul>
                                 <div class="packages-mini-card-divider"></div>
-                                <a href="mailto:hello@firstindallas.com?subject=Momentum%20(Top%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                <a class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                   data-plan="Momentum (Top Slot)"
+                                   href="https://tally.so/r/mV2qJM?selected_plan=Momentum%20(Top%20Slot)&source=media-kit"
+                                   target="_blank" rel="noopener">
                                     Select Package
                                 </a>
                             </div>
@@ -2335,7 +2388,10 @@
                                     <li>• Complimentary copy polish on first insertion</li>
                                 </ul>
                                 <div class="packages-mini-card-divider"></div>
-                                <a href="mailto:hello@firstindallas.com?subject=Momentum%20(Bottom%20Slot)%20Inquiry" class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                <a class="block w-full bg-brand-coral text-white text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                   data-plan="Momentum (Bottom Slot)"
+                                   href="https://tally.so/r/mV2qJM?selected_plan=Momentum%20(Bottom%20Slot)&source=media-kit"
+                                   target="_blank" rel="noopener">
                                     Select Package
                                 </a>
                             </div>
@@ -2360,7 +2416,10 @@
                                         <li>• Priority scheduling and creative optimization</li>
                                     </ul>
                                     <div class="packages-mini-card-divider" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);"></div>
-                                    <a href="mailto:hello@firstindallas.com?subject=Takeover%20(Top%20Slot)%20Package%20Inquiry" class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    <a class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                       data-plan="Takeover (Top Slot)"
+                                       href="https://tally.so/r/mV2qJM?selected_plan=Takeover%20(Top%20Slot)&source=media-kit"
+                                       target="_blank" rel="noopener">
                                         Select Package
                                     </a>
                                 </div>
@@ -2380,7 +2439,10 @@
                                         <li>• Priority scheduling and creative optimization</li>
                                     </ul>
                                     <div class="packages-mini-card-divider" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);"></div>
-                                    <a href="mailto:hello@firstindallas.com?subject=Takeover%20(Bottom%20Slot)%20Package%20Inquiry" class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                    <a class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                       data-plan="Takeover (Bottom Slot)"
+                                       href="https://tally.so/r/mV2qJM?selected_plan=Takeover%20(Bottom%20Slot)&source=media-kit"
+                                       target="_blank" rel="noopener">
                                         Select Package
                                     </a>
                                 </div>
@@ -2405,7 +2467,10 @@
                                     <li>• Includes support for UTM tracking and up to multiple CTAs and images</li>
                                 </ul>
                                 <div class="packages-mini-card-divider" style="background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);"></div>
-                                <a href="mailto:hello@firstindallas.com?subject=Dedicated%20Email%20Package%20Inquiry" class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                                <a class="block w-full bg-brand-gold text-brand-navy text-center py-3 rounded-full font-semibold hover:bg-opacity-90 transition"
+                                   data-plan="Dedicated Email"
+                                   href="https://tally.so/r/mV2qJM?selected_plan=Dedicated%20Email&source=media-kit"
+                                   target="_blank" rel="noopener">
                                     Select Package
                                 </a>
                             </div>
@@ -4195,6 +4260,67 @@
                 });
             });
         });
+    </script>
+
+    <!-- Thank You Toast -->
+    <div id="thank-you-toast" class="thank-you-toast" role="alert" aria-live="polite">
+        Thanks! We'll get back to you within 1 business day.
+    </div>
+
+    <!-- Tally Form Integration -->
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <script>
+      (function () {
+        const FORM_ID = "mV2qJM";
+        
+        // Function to show thank you toast
+        const showThankYouToast = () => {
+          const toast = document.getElementById('thank-you-toast');
+          if (toast) {
+            toast.classList.add('show');
+            setTimeout(() => {
+              toast.classList.remove('show');
+            }, 3500); // Show for 3.5 seconds
+          }
+        };
+        
+        // Listen for Tally form submission event
+        window.addEventListener('message', (event) => {
+          // Tally sends postMessage events when form is submitted
+          if (event.data && typeof event.data === 'object') {
+            // Check for Tally submission event
+            if (event.data.event === 'Tally.FormSubmitted' || 
+                (event.data.type === 'tally' && event.data.payload && event.data.payload.event === 'submit')) {
+              showThankYouToast();
+            }
+          }
+        });
+        
+        const openWithPrefill = (plan) => {
+          if (window.Tally && typeof Tally.openPopup === "function") {
+            Tally.openPopup(FORM_ID, {
+              layout: "modal",
+              width: 720,
+              autoClose: 0,
+              hiddenFields: { selected_plan: plan, source: "media-kit" },
+              onSubmit: () => {
+                // Show toast when form is submitted via popup
+                showThankYouToast();
+              }
+            });
+            return true;
+          }
+          return false;
+        };
+        
+        document.querySelectorAll('[data-plan]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const plan = btn.getAttribute('data-plan') || btn.textContent.trim();
+            // Try popup; if not available, allow the prefilled link fallback to open
+            if (openWithPrefill(plan)) e.preventDefault();
+          });
+        });
+      })();
     </script>
 
 </body>
